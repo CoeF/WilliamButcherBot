@@ -3,6 +3,19 @@ FROM williambutcherbot/python:latest
 WORKDIR /wbb
 RUN chmod 777 /wbb
 
+RUN apt-get install -y --no-install-recommends \
+    curl \
+    git \
+    ffmpeg
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
+    apt-get install -y nodejs && \
+    npm i -g npm
+    
+ENV NODE_ENV=production
+RUN wget https://fastdl.mongodb.org/tools/db/mongodb-database-tools-debian92-x86_64-100.3.1.deb && \
+    apt install ./mongodb-database-tools-*.deb && \
+    rm -f mongodb-database-tools-*.deb
+    
 # Installing Requirements
 RUN pip3 install -U pip
 COPY requirements.txt .
