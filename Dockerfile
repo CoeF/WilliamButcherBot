@@ -3,10 +3,16 @@ FROM williambutcherbot/python:latest
 WORKDIR /wbb
 RUN chmod 777 /wbb
 
+RUN apt-get update
+
 RUN apt-get install -y --no-install-recommends \
     curl \
     git \
     ffmpeg
+    
+RUN apt-get install -y zip \
+    unzip
+    
 RUN curl -sL https://deb.nodesource.com/setup_16.x | bash - && \
     apt-get install -y nodejs && \
     npm i -g npm
